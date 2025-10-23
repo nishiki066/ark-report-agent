@@ -49,6 +49,8 @@ logs/*.log
 *.sqlite
 *.sqlite3
 
+tests/
+
 # 其他
 .coverage
 htmlcov/
