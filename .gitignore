@@ -1,0 +1,55 @@
+# .gitignore
+
+# 环境变量文件 - 包含敏感信息,绝不上传
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 日志文件
+logs/*.log
+*.log
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+
+# 数据库备份
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# 其他
+.coverage
+htmlcov/
+.pytest_cache/
