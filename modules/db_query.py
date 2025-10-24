@@ -94,22 +94,3 @@ def get_latest_logs():
     return result
 
 
-if __name__ == "__main__":
-    """测试读取功能"""
-    print("\n测试数据读取模块...")
-
-    data = get_latest_logs()
-
-    if data['cn']:
-        print(f"\n🇨🇳 中国区:")
-        print(f"   execution_id: {data['cn']['execution_id']}")
-        print(f"   时间: {data['cn']['timestamp']}")
-        print(f"   日志数: {len(data['cn']['logs'])}")
-
-    if data['jp']:
-        print(f"\n🇯🇵 日本区:")
-        print(f"   execution_id: {data['jp']['execution_id']}")
-        print(f"   时间: {data['jp']['timestamp']}")
-        print(f"   日志数: {len(data['jp']['logs'])}")
-
-    print("\n✅ 数据读取完成")
