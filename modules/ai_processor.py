@@ -263,12 +263,7 @@ def call_deepseek_api_stream(prompt, show_time=True):
         full_content = []
         char_count = 0
 
-        print("\n" + "=" * 80)
-        if show_time:
-            print("🤖 AI 实时输出 [计时开始...]")
-        else:
-            print("🤖 AI 实时输出:")
-        print("=" * 80)
+
 
         # 逐行读取流式响应
         for line in response.iter_lines():
@@ -309,10 +304,7 @@ def call_deepseek_api_stream(prompt, show_time=True):
         # 计算总耗时
         total_time = time.time() - start_time
 
-        print("\n" + "=" * 80)
-        if show_time:
-            print(f"⏱️  生成完成! 耗时: {total_time:.2f} 秒 | 字符数: {char_count}")
-        print("=" * 80)
+
 
         # 返回完整内容
         return ''.join(full_content)
@@ -391,22 +383,22 @@ def process_with_ai(filtered_data, stream=True, show_time=True):
     Returns:
         AI 生成的报告文本
     """
-    print("\n📝 格式化日志数据...")
+
     log_content = format_logs_for_ai(filtered_data)
 
-    print("🤖 创建 AI Prompt...")
+
     prompt = create_prompt(log_content)
 
     if stream:
-        print("🚀 调用 DeepSeek API (流式输出)...")
+
         report = call_deepseek_api_stream(prompt, show_time=show_time)
     else:
-        print("🚀 调用 DeepSeek API (普通模式)...")
-        report = call_deepseek_api(prompt)
-        print("\n" + "=" * 80)
-        print(report)
-        print("=" * 80)
 
-    print("\n✅ AI 报告生成完成!")
+        report = call_deepseek_api(prompt)
+
+        print(report)
+
+
+
 
     return report
