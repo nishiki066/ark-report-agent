@@ -211,14 +211,14 @@ def show_progress(start_time):
     return elapsed
 
 
-def call_deepseek_api_stream(prompt, show_time=True):
+def call_deepseek_api_stream(prompt):
     """
     调用 DeepSeek API (流式输出)
-    实时显示 AI 生成的内容,并显示计时
+    实时显示 AI 生成的内容
 
     Args:
         prompt: 要发送的 prompt
-        show_time: 是否显示计时信息
+
 
     Returns:
         AI 生成的完整回复文本
@@ -301,10 +301,6 @@ def call_deepseek_api_stream(prompt, show_time=True):
                     # 忽略无法解析的行
                     continue
 
-        # 计算总耗时
-        total_time = time.time() - start_time
-
-
 
         # 返回完整内容
         return ''.join(full_content)
@@ -371,14 +367,14 @@ def call_deepseek_api(prompt):
         raise Exception(f"调用 DeepSeek API 失败: {e}")
 
 
-def process_with_ai(filtered_data, stream=True, show_time=True):
+def process_with_ai(filtered_data, stream=True):
     """
     使用 AI 处理日志数据，生成报告
 
     Args:
         filtered_data: 从 filter_logs() 获取的过滤后数据
         stream: 是否使用流式输出 (默认 True)
-        show_time: 是否显示计时信息 (默认 True)
+
 
     Returns:
         AI 生成的报告文本
@@ -391,7 +387,7 @@ def process_with_ai(filtered_data, stream=True, show_time=True):
 
     if stream:
 
-        report = call_deepseek_api_stream(prompt, show_time=show_time)
+        report = call_deepseek_api_stream(prompt)
     else:
 
         report = call_deepseek_api(prompt)
