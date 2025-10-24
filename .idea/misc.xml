@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Remote Python 3.13.7 (sftp://nishiki@192.168.3.12:22/home/nishiki/.virtualenvs/ark-report-agent/bin/python)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.13.7 (sftp://nishiki@192.168.194.127:22/home/nishiki/.virtualenvs/ark-report-agent/bin/python)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.13.7 (sftp://nishiki@192.168.3.12:22/home/nishiki/.virtualenvs/ark-report-agent/bin/python)" project-jdk-type="Python SDK" />
 </project>
