@@ -101,6 +101,8 @@ def create_ai_report_placeholder(arkcn_execution_id, arkjp_execution_id, balance
     """
     创建 AI 报告占位记录（每次都插入新记录）
 
+    优先选择 CNY 币种的余额信息
+
     Args:
         arkcn_execution_id: 中国区执行ID
         arkjp_execution_id: 日本区执行ID
@@ -118,18 +120,32 @@ def create_ai_report_placeholder(arkcn_execution_id, arkjp_execution_id, balance
         balance_infos = balance_data.get('balance_infos', [])
 
         if balance_infos:
-            balance_info = balance_infos[0]
+            # 优先查找 CNY 币种
+            balance_info = None
+            for info in balance_infos:
+                if info.get('currency') == 'CNY':
+                    balance_info = info
+                    print(f"   ✅ 使用 CNY 币种余额")
+                    break
+
+            # 如果没找到 CNY，使用第一个币种
+            if not balance_info:
+                balance_info = balance_infos[0]
+                print(f"   ⚠️  未找到 CNY 币种，使用 {balance_info.get('currency', 'UNKNOWN')} 币种")
+
             currency = balance_info.get('currency', 'CNY')
             total_balance = float(balance_info.get('total_balance', '0.00'))
             granted_balance = float(balance_info.get('granted_balance', '0.00'))
             topped_up_balance = float(balance_info.get('topped_up_balance', '0.00'))
         else:
+            # 如果 balance_infos 为空，使用默认值
+            print(f"   ⚠️  balance_infos 为空，使用默认值")
             currency = 'CNY'
             total_balance = 0.00
             granted_balance = 0.00
             topped_up_balance = 0.00
 
-        # 直接插入新记录（不再使用 ON DUPLICATE KEY UPDATE）
+        # 直接插入新记录
         sql = """
             INSERT INTO ai_reports (
                 arkcn_execution_id,
@@ -167,7 +183,6 @@ def create_ai_report_placeholder(arkcn_execution_id, arkjp_execution_id, balance
     finally:
         cursor.close()
         conn.close()
-
 
 # update_ai_report 函数保持不变
 def update_ai_report(report_id, report_content, status='completed'):
